@@ -17,19 +17,15 @@ while True:
             if speech_text.lower() == "exit":
                 break
 
-            try:
-                translated_text = translator.translate(speech_text, dest='fr').text
-                print(translated_text)
+            translated_text = translator.translate(speech_text, dest='es').text
+            print(translated_text)
 
-                voice = gTTS(translated_text, lang='fr')
-                voice.save("voice.mp3")
-                playsound("voice.mp3")
-                os.remove("voice.mp3")
-
-            except Exception as translation_error:
-                print(f"Translation error: {str(translation_error)}")
+            voice = gTTS(translated_text, lang='es')
+            voice.save("voice.mp3")
+            playsound("voice.mp3")
+            os.remove("voice.mp3")
 
         except sr.UnknownValueError:
             print("Couldn't understand")
-        except sr.RequestError as request_error:
-            print(f"Couldn't request results from Google: {str(request_error)}")
+        except sr.RequestError:
+            print("Couldn't request results from Google")
